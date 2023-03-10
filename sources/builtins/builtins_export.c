@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 23:33:48 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/10 16:56:58 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 19:11:29 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	ft_modify_env_with_equal_sign(t_env **head, char *cmd_arg)
 	{
 		env_var->value = value;
 		env_var->equal = true;
-		ft_free_remove(FREE, key);
 	}
 	else
 		*head = add_node(*head, key, value, true);

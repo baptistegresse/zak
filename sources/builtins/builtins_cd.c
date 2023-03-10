@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 00:53:23 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/10 16:56:55 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 19:10:43 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_set_env(t_env **head, char *key, char *value, bool equal)
 	{
 		if (!ft_strcmp(temp->key, key))
 		{
-			ft_free_remove(FREE, temp->value);
 			temp->value = ft_strdup(value);
 			temp->equal = equal;
 			return ;

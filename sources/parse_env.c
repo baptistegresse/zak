@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:06:30 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/10 16:56:52 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 19:11:26 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	ft_parse_env(t_env **head, char **envp)
 			else
 				value = ft_strdup(equal + 1);
 			*head = add_node(*head, key, value, true);
-			ft_free_remove(FREE, key);
 		}
 		i++;
 	}

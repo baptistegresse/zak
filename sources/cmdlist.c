@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:12:12 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/10 17:04:36 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 20:06:03 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,18 @@ int	ft_error(char **parsed_line, int i)
 			return (2);
 	}
 	if (!ft_strcmp(parsed_line[i], "|"))
+	{
 		if (!parsed_line[i + 1])
 			return (3);
+		if (!ft_strcmp(parsed_line[i + 1], "|"))
+			return (3);
+	}
 	return (0);
 }
 
 void	ft_syntax_error(char **parsed_line, int i)
 {
-	if (!ft_strcmp(parsed_line[i - 1], ">") \
+	if (i && !ft_strcmp(parsed_line[i - 1], ">") \
 		&& !ft_strcmp(parsed_line[i], "|"))
 		i++;
 	ft_putstr_fd("syntax error near unexpected token '", 2);
@@ -80,14 +84,14 @@ Parameters int i and int j must be set to 0 on function call to save lines. */
 
 void	ft_fullcmds(char **parsed_line, t_cmdlist *cmds, int i, int j)
 {
-	cmds->full_cmd = ft_calloc(sizeof(char *), 50);
+	cmds->full_cmd = ft_calloc(sizeof(char *), 100);
 	while (parsed_line[i])
 	{
 		if (!ft_strcmp(parsed_line[i], "|"))
 		{
 			cmds->full_cmd[j] = 0;
 			cmds = cmds->next;
-			cmds->full_cmd = ft_calloc(sizeof(char *), 50);
+			cmds->full_cmd = ft_calloc(sizeof(char *), 100);
 			j = 0;
 			i++;
 		}
@@ -131,6 +135,8 @@ t_cmdlist	*ft_cmdlist(char *cmd_line, t_minishell *data)
 	cmd_line = ft_expand_var(&data->head_env, cmd_line);
 	parsed_line = ft_split_tokens(cmd_line, "<|>");
 	parsed_line = ft_remove_quotes(parsed_line);
+	for (int i = 0; parsed_line[i]; i++)
+		printf("%s\n", parsed_line[i]);
 	if (!ft_redirection(parsed_line, cmds))
 		return (0);
 	ft_fullcmds(parsed_line, cmds, 0, 0);

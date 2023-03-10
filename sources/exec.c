@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:17:49 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/10 16:56:42 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 19:09:23 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	ft_exec(t_minishell *data)
 			if (!cmd)
 				return ;
 			execve(cmd, data->cmds->full_cmd, data->envp);
-			ft_free_remove(FREE, cmd);
 		}
 	}
 	ft_putstr_fd("command not found: ", 2);

@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 13:18:32 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 20:23:31 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 19:20:47 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_env	*new_node(char *key, char *value, bool equal)
 {
 	t_env	*node;
 
-	node = ft_free_malloc(global.m_free, (sizeof(t_env)));
+	node = ft_calloc(sizeof(t_env), 1);
 	node->key = ft_strndup(key, ft_strlen(key));
 	node->value = ft_strndup(value, ft_strlen(value));
 	node->equal = equal;

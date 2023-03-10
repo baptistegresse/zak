@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:52:56 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/10 16:56:45 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 19:45:26 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	ft_input(t_cmdlist *cmds, t_env **head_env)
 		line = ft_expand_var(head_env, line);
 		ft_putstr_fd(line, 2);
 		ft_putstr_fd("\n", 2);
-		ft_free_remove(FREE, line);
+		free(line);
 	}
 	exit(0);
 }

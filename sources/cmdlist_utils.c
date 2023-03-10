@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:03:53 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 20:23:17 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 19:34:40 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_cmdlist	*ft_cmdnew(void)
 {
 	t_cmdlist	*new;
 
-	new = ft_free_malloc(global.m_free, (sizeof(*new)));
+	new = ft_calloc((sizeof(*new)), 1);
 	if (!new)
-		return (0);
+		exit(1);
 	new->full_cmd = 0;
 	new->infile = 0;
 	new->outfile = 1;

@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 14:51:24 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 00:57:37 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 19:08:07 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_redirection(char **parsed_line, t_cmdlist *cmds)
 	while (parsed_line[++i])
 	{
 		if (!ft_strcmp(parsed_line[i], "|"))
-			ft_redirect_pipe(&cmds);
+			cmds = cmds->next;
 		else if (!ft_strcmp(parsed_line[i], "<"))
 			ft_redirect_infile(parsed_line, cmds, i);
 		else if (!ft_strcmp(parsed_line[i], ">>"))

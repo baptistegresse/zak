@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 16:02:59 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/10 17:00:46 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 20:07:55 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_refresh_envp(t_env *head)
 	if (!head)
 		return (NULL);
 	env_len = ft_list_size(head);
-	env = ft_free_malloc(global.m_free, (sizeof(char *) * env_len));
+	env = ft_calloc(sizeof(char *), (env_len + 1));
 	i = 0;
 	while (head)
 	{
@@ -82,6 +82,7 @@ void	ft_prompt(t_minishell *data)
 			continue ;
 		add_history(buffer);
 		data->cmds = ft_cmdlist(buffer, data);
+		// ft_print_cmdlist(data->cmds);
 		free(buffer);
 		if (data->cmds)
 		{
@@ -94,8 +95,8 @@ void	ft_prompt(t_minishell *data)
 			global.g_status = WEXITSTATUS(data->status);
 			while (data->cmds)
 			{
-				if (data->cmds->here_doc && \
-				close(data->cmds->here_doc_pipe[0]) == -1)
+				if (data->cmds->here_doc && !data->cmds->error \
+				&& close(data->cmds->here_doc_pipe[0]) == -1)
 					perror("close pipe main");
 				if (data->cmds->outfile > 1 && close(data->cmds->outfile) == -1)
 					perror("close outfile");
@@ -113,9 +114,10 @@ int	main(int argc, char **argv, char **envp)
 	t_minishell	*data;
 
 	global.m_free = ft_free_init();
-	data = ft_free_malloc(global.m_free, (sizeof(t_minishell)));
+	data = ft_calloc(sizeof(t_minishell), 1);
+	if (!data)
+		return (1);
 	data_init(argc, argv, envp, data);
 	ft_prompt(data);
-	ft_free(global.m_free);
-	return (global.g_status);
+	return (ft_free(global.m_free), global.g_status);
 }

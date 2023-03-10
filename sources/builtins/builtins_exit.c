@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 00:53:31 by bgresse           #+#    #+#             */
-/*   Updated: 2023/03/10 16:47:08 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 19:59:25 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_built_in_exit(t_minishell *data)
 	i = -1;
 	printf("exit\n");
 	if (!data->cmds->full_cmd[1] || !*data->cmds->full_cmd[1])
-		return (ft_free(global.m_free), exit(0));
+		return (ft_free(global.m_free), exit(global.g_status));
 	while (data->cmds->full_cmd[1][++i])
 	{
 		if (data->cmds->full_cmd[1][i] < '0'

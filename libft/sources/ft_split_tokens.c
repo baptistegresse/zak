@@ -6,7 +6,7 @@
 /*   By: bgresse <bgresse@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 19:37:03 by zrebhi            #+#    #+#             */
-/*   Updated: 2023/03/09 20:19:44 by bgresse          ###   ########.fr       */
+/*   Updated: 2023/03/10 19:51:21 by bgresse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ static char	*ft_dupstr(char const *s, int i, int j)
 	char	*dup;
 	int		x;
 
-	dup = ft_free_malloc(global.m_free, (sizeof(char) * (j - i + 1)));
+	dup = ft_calloc(sizeof(char), j - i + 1);
 	if (!dup)
-		return (0);
+		exit(1);
 	x = 0;
 	while (s[i] && i < j)
 		dup[x++] = s[i++];
@@ -116,14 +116,16 @@ static char	**ft_lines(char const *s, char *charset, t_split *lines)
 char	**ft_split_tokens(char const *s, char *charset)
 {
 	t_split	lines;
+	int		words;
 
 	lines.i = 0;
 	lines.x = 0;
 	if (!s)
 		return (0);
-	lines.strs = ft_free_malloc(global.m_free, (sizeof(char *) * (ft_words(s, charset, 0, 0) + 1)));
+	words = ft_words(s, charset, 0, 0);
+	lines.strs = ft_calloc(sizeof(char *), words + 1);
 	if (!lines.strs)
-		return (NULL);
+		exit(1);
 	lines.strs = ft_lines(s, charset, &lines);
 	if (lines.strs)
 		lines.strs[ft_words(s, charset, 0, 0)] = 0;
